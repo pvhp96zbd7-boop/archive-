@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>03.12.2025</title>
+<style>
+  :root { --bg:#f4f2ee; --ink:#161616; --mute:#8a8780; --line:#d9d6cf; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--ink); font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; line-height:1.5; }
+  .wrap { max-width:520px; margin:0 auto; padding:28px 20px 60px; }
+  .top { display:flex; justify-content:space-between; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--mute); border-bottom:1px solid var(--line); padding-bottom:10px; }
+  h1 { font-size:44px; font-weight:500; letter-spacing:-.02em; margin:36px 0 6px; }
+  .sub { font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--mute); }
+  figure { margin:32px 0 0; }
+  figure img { width:100%; display:block; background:#e6e3dc; aspect-ratio:4/5; object-fit:cover; }
+  figcaption { display:flex; gap:14px; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--mute); padding-top:8px; }
+  figcaption b { color:var(--ink); font-weight:600; }
+  .card { margin-top:36px; border-top:1px solid var(--ink); padding-top:14px; }
+  .card h2 { font-size:11px; letter-spacing:.16em; text-transform:uppercase; font-weight:600; margin-bottom:10px; }
+  .card p { font-size:15px; }
+  .links a { display:block; color:var(--ink); text-decoration:none; font-size:15px; padding:8px 0; border-bottom:1px solid var(--line); }
+  .links a span { color:var(--mute); font-size:11px; letter-spacing:.1em; margin-right:10px; }
+  .player { display:flex; align-items:center; gap:12px; font-size:12px; letter-spacing:.1em; text-transform:uppercase; }
+  .player button { background:none; border:1px solid var(--ink); color:var(--ink); padding:6px 14px; font:inherit; cursor:pointer; }
+  #gate { position:fixed; inset:0; background:var(--bg); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; z-index:10; cursor:pointer; }
+  #gate .big { font-size:44px; font-weight:500; letter-spacing:-.02em; }
+  #gate .hint { font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--mute); }
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="big">03.12.2025</div>
+  <div class="hint">нажми, чтобы войти</div>
+</div>
+
+<div class="wrap">
+  <div class="top"><span>Архив</span><span>№ 001</span></div>
+
+  <h1>03.12.2025</h1>
+  <div class="sub">Начало · коллекция №1</div>
+
+  <figure>
+    <!-- Положи фото в репозиторий под именем photo.jpg -->
+    <img src="photo.jpg" alt="Мы">
+    <figcaption><b>Экспонат 001</b><span>Мы, 2025</span></figcaption>
+  </figure>
+
+  <div class="card">
+    <h2>Биография</h2>
+    <p>Здесь будет твой текст о себе. Поменяй эти строки на то, что хочешь написать.</p>
+  </div>
+
+  <div class="card">
+    <h2>Звук</h2>
+    <div class="player">
+      <button id="btn">Пауза</button>
+      <span>Название песни</span>
+    </div>
+  </div>
+
+  <div class="card links">
+    <h2>Ссылки</h2>
+    <a href="https://instagram.com/" target="_blank"><span>01</span>Instagram</a>
+    <a href="https://t.me/" target="_blank"><span>02</span>Telegram</a>
+    <a href="https://tiktok.com/" target="_blank"><span>03</span>TikTok</a>
+  </div>
+</div>
+
+<!-- Положи музыку в репозиторий под именем music.mp3 -->
+<audio id="audio" src="music.mp3" loop></audio>
+
+<script>
+  var audio = document.getElementById('audio');
+  var btn = document.getElementById('btn');
+  document.getElementById('gate').addEventListener('click', function () {
+    this.style.display = 'none';
+    audio.play();
+  });
+  btn.addEventListener('click', function () {
+    if (audio.paused) { audio.play(); btn.textContent = 'Пауза'; }
+    else { audio.pause(); btn.textContent = 'Играть'; }
+  });
+</script>
+</body>
+</html>
