@@ -3,102 +3,144 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>03.12.2025</title>
+<meta name="theme-color" content="#08080a">
+<title>03.12.2025 — personal archive</title>
 <style>
-  :root { --bg:#f4f2ee; --ink:#161616; --mute:#8a8780; --line:#d9d6cf; }
+  :root { --bg:#08080a; --ink:#ececee; --mute:#8b8b93; --line:rgba(255,255,255,.14); --glass:rgba(10,10,14,.55); }
   * { box-sizing:border-box; margin:0; padding:0; }
-  body { background:var(--bg); color:var(--ink); font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; line-height:1.5; }
-  .wrap { max-width:520px; margin:0 auto; padding:28px 20px 60px; }
-  .top { display:flex; justify-content:space-between; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--mute); border-bottom:1px solid var(--line); padding-bottom:10px; }
-  h1 { font-size:44px; font-weight:500; letter-spacing:-.02em; margin:36px 0 6px; }
-  .sub { font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--mute); }
-  figure { margin:32px 0 0; }
-  figure img { width:100%; display:block; background:#e6e3dc; aspect-ratio:4/5; object-fit:cover; }
-  figcaption { display:flex; gap:14px; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--mute); padding-top:8px; }
-  figcaption b { color:var(--ink); font-weight:600; }
-  .card { margin-top:36px; border-top:1px solid var(--ink); padding-top:14px; }
-  .card h2 { font-size:11px; letter-spacing:.16em; text-transform:uppercase; font-weight:600; margin-bottom:10px; }
-  .card p { font-size:15px; }
-  .links a { display:block; color:var(--ink); text-decoration:none; font-size:15px; padding:8px 0; border-bottom:1px solid var(--line); }
-  .links a span { color:var(--mute); font-size:11px; letter-spacing:.1em; margin-right:10px; }
-  .player { display:flex; align-items:center; gap:12px; font-size:12px; letter-spacing:.1em; text-transform:uppercase; }
-  .player button { background:none; border:1px solid var(--ink); color:var(--ink); padding:6px 14px; font:inherit; cursor:pointer; }
-  #gate { position:fixed; inset:0; background:var(--bg); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; z-index:10; cursor:pointer; }
-  #gate .big { font-size:44px; font-weight:500; letter-spacing:-.02em; }
-  #gate .hint { font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--mute); }
-  .stats { display:flex; align-items:center; justify-content:space-between; font-size:12px; letter-spacing:.1em; text-transform:uppercase; }
-  .stats button { background:none; border:1px solid var(--ink); color:var(--ink); padding:6px 14px; font:inherit; cursor:pointer; }
-  .stats button.liked { background:var(--ink); color:var(--bg); }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--ink); font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  .mono { font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--mute); }
+
+  /* обои */
+  #wall { position:fixed; inset:0; z-index:-1; background:#08080a url("wallpaper.jpg") center/cover no-repeat; }
+  #wall::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(8,8,10,.55) 0%,rgba(8,8,10,.78) 50%,rgba(8,8,10,.92) 100%); }
+
+  /* вход */
+  #gate { position:fixed; inset:0; z-index:50; background:rgba(8,8,10,.94); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px; cursor:pointer; text-align:center; padding:20px; }
+  #gate .big { font-size:46px; font-weight:500; letter-spacing:-.02em; }
+  #gate .enter { border:1px solid var(--ink); padding:12px 34px; font-family:ui-monospace,Menlo,monospace; letter-spacing:.3em; font-size:13px; }
+
+  /* меню */
+  nav { position:sticky; top:0; z-index:20; display:flex; justify-content:space-between; align-items:center; padding:14px 20px; background:rgba(8,8,10,.6); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
+  nav div { display:flex; gap:14px; }
+  nav a { color:var(--ink); text-decoration:none; }
+
+  .wrap { max-width:560px; margin:0 auto; padding:0 20px 80px; }
+
+  /* главный экран */
+  .hero { padding:56px 0 40px; text-align:center; }
+  .avatar { width:150px; height:150px; border-radius:50%; object-fit:cover; border:1px solid var(--line); box-shadow:0 0 0 6px rgba(255,255,255,.04); margin:22px auto; display:block; background:#1a1a1e; }
+  .hero h1 { font-size:54px; font-weight:500; letter-spacing:-.03em; margin:6px 0; }
+  .btns { display:flex; gap:10px; justify-content:center; margin-top:26px; flex-wrap:wrap; }
+  .btn { border:1px solid var(--ink); color:var(--ink); text-decoration:none; padding:11px 20px; font-family:ui-monospace,Menlo,monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; background:transparent; cursor:pointer; }
+  .btn.fill { background:var(--ink); color:var(--bg); }
+
+  /* секции */
+  section { margin-top:22px; padding:22px 20px; background:var(--glass); border:1px solid var(--line); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
+  section h2 { font-size:26px; font-weight:500; letter-spacing:-.02em; margin:4px 0 14px; }
+  section p { font-size:15px; }
+
+  .links a { display:flex; justify-content:space-between; color:var(--ink); text-decoration:none; padding:12px 0; border-top:1px solid var(--line); font-family:ui-monospace,Menlo,monospace; font-size:12px; letter-spacing:.16em; text-transform:uppercase; }
+  .links a:first-of-type { border-top:0; }
+
+  .player { display:flex; align-items:center; gap:14px; }
+  .player .title { font-size:16px; }
+  .player .btn { margin-left:auto; }
+
+  .stats { display:flex; align-items:center; justify-content:space-between; }
+  .stats b { font-size:30px; font-weight:500; margin-right:6px; }
+  #likeBtn.liked { background:var(--ink); color:var(--bg); }
+
   form { display:flex; flex-direction:column; gap:8px; margin-bottom:18px; }
-  form input, form textarea { background:transparent; border:1px solid var(--line); border-radius:0; padding:10px; font:inherit; font-size:15px; color:var(--ink); }
-  form textarea { min-height:70px; resize:vertical; }
-  form button { align-self:flex-start; background:var(--ink); color:var(--bg); border:0; padding:8px 18px; font:inherit; font-size:12px; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; }
-  .c { border-top:1px solid var(--line); padding:10px 0; }
-  .c b { font-size:13px; font-weight:600; }
+  form input, form textarea { background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:0; padding:11px; font:inherit; font-size:15px; color:var(--ink); }
+  form textarea { min-height:76px; resize:vertical; }
+  form .btn { align-self:flex-start; }
+  .c { border-top:1px solid var(--line); padding:12px 0; }
+  .c b { font-size:14px; font-weight:600; }
   .c small { color:var(--mute); font-size:11px; letter-spacing:.08em; margin-left:8px; }
-  .c p { font-size:15px; margin-top:2px; word-wrap:break-word; }
+  .c p { margin-top:2px; word-wrap:break-word; }
+
+  footer { text-align:center; margin-top:40px; }
 </style>
 </head>
 <body>
 
+<div id="wall"></div>
+
 <div id="gate">
+  <div class="mono">A personal digital space</div>
   <div class="big">03.12.2025</div>
-  <div class="hint">нажми, чтобы войти</div>
+  <div class="enter">ENTER</div>
 </div>
 
-<div class="wrap">
-  <div class="top"><span>Архив</span><span>№ 001</span></div>
-
-  <h1>03.12.2025</h1>
-  <div class="sub">Начало · коллекция №1</div>
-
-  <figure>
-    <!-- Положи фото в репозиторий под именем photo.jpg -->
-    <img src="IMG_0140.jpeg" alt="Мы">
-    <figcaption><b>Экспонат 001</b><span>Мы, 2025</span></figcaption>
-  </figure>
-
-  <div class="card">
-    <h2>Биография</h2>
-    <p>Самая лучшая семья 2025 года. Могаем, твоё семейное древо. Есть сын: Нуар Кашмарит Чушпанов.</p>
+<nav>
+  <span class="mono">Archive / 001</span>
+  <div class="mono">
+    <a href="#about">About</a><a href="#links">Links</a><a href="#sound">Sound</a><a href="#book">Book</a>
   </div>
+</nav>
 
-  <div class="card">
-    <h2>Звук</h2>
-    <div class="player">
-      <button id="btn">Пауза</button>
-      <span>для быдло</span>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="mono">Personal page — 001</div>
+    <img class="avatar" src="IMG_0140.jpeg" alt="Мы">
+    <h1>03.12.2025</h1>
+    <div class="mono">Internet identity / archive</div>
+    <div class="btns">
+      <a class="btn fill" href="#about">Read our story ↘</a>
+      <a class="btn" href="#links">Find us ↗</a>
     </div>
   </div>
 
-  <div class="card">
+  <section id="about">
+    <div class="mono">01 / Biography</div>
+    <h2>Обо мне</h2>
+    <p>Самая лучшая семья 2025 года. Могаем, твоё семейное древо. Есть сын: Нуар Кашмарит Чушпанов.</p>
+  </section>
+
+  <section id="links" class="links">
+    <div class="mono">02 / Socials</div>
+    <h2>Найти нас</h2>
+    <a href="https://t.me/uzniksnoca" target="_blank"><span>Telegram, его</span><span>↗</span></a>
+    <a href="https://t.me/MIKORTI0" target="_blank"><span>Telegram-канал, её</span><span>↗</span></a>
+    <a href="https://www.tiktok.com/@emo89426" target="_blank"><span>TikTok, его</span><span>↗</span></a>
+    <a href="https://www.tiktok.com/@swmxer.w" target="_blank"><span>TikTok, её</span><span>↗</span></a>
+  </section>
+
+  <section id="sound">
+    <div class="mono">03 / Soundtrack</div>
+    <h2>Сейчас играет</h2>
+    <div class="player">
+      <div class="title">для быдло</div>
+      <button class="btn" id="btn">Пауза</button>
+    </div>
+  </section>
+
+  <section>
+    <div class="mono">04 / Statistics</div>
     <h2>Статистика</h2>
     <div class="stats">
-      <span>Просмотров: <b id="views">–</b></span>
-      <button id="likeBtn">♡ <span id="likes">–</span></button>
+      <span><b id="views">–</b><span class="mono">просмотров</span></span>
+      <button class="btn" id="likeBtn">♡ <span id="likes">–</span></button>
     </div>
-  </div>
+  </section>
 
-  <div class="card">
+  <section id="book">
+    <div class="mono">05 / Guestbook</div>
     <h2>Комментарии</h2>
     <form id="cform">
       <input id="cname" maxlength="40" placeholder="Имя" required>
       <textarea id="cbody" maxlength="300" placeholder="Комментарий" required></textarea>
-      <button type="submit">Отправить</button>
+      <button class="btn fill" type="submit">Отправить</button>
     </form>
     <div id="clist"></div>
-  </div>
+  </section>
 
-  <div class="card links">
-    <h2>Ссылки</h2>
-    <a href="https://t.me/uzniksnoca" target="_blank"><span>01</span>Telegram, его</a>
-    <a href="https://t.me/MIKORTI0" target="_blank"><span>02</span>Telegram-канал, её</a>
-    <a href="https://www.tiktok.com/@emo89426" target="_blank"><span>03</span>TikTok, его</a>
-    <a href="https://www.tiktok.com/@swmxer.w" target="_blank"><span>04</span>TikTok, её</a>
-  </div>
+  <footer class="mono">End of transmission — 03.12.2025</footer>
 </div>
 
-<!-- Положи музыку в репозиторий под именем music.mp3 -->
 <audio id="audio" src="hypnotic%20data%20(sped%20up).mp4" loop></audio>
 
 <script>
@@ -147,13 +189,11 @@
       }).catch(function () {});
   }
 
-  // просмотр считаем один раз с одного браузера
   if (!store('viewed')) {
     fetch(SB + '/rpc/add_view', { method: 'POST', headers: H, body: '{}' })
       .then(function () { store('viewed', '1'); loadStats(); }).catch(function () {});
   } else { loadStats(); }
 
-  // лайк: один раз с одного браузера
   var likeBtn = document.getElementById('likeBtn');
   if (store('liked')) likeBtn.classList.add('liked');
   likeBtn.addEventListener('click', function () {
@@ -164,7 +204,6 @@
       .then(loadStats).catch(function () {});
   });
 
-  // комментарии
   document.getElementById('cform').addEventListener('submit', function (e) {
     e.preventDefault();
     var name = document.getElementById('cname').value.trim();
